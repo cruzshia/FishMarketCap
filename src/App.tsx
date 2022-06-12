@@ -1,28 +1,33 @@
-import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 import store from './providers/store'
-import Layout from './components/Layout'
+import ThemeProvider from './providers/theme'
+import AppRoutes from './AppRoutes'
 import './i18n'
-import { useTranslation } from 'react-i18next'
-
-const Home = lazy(() => import('./features/Home'))
 
 function App() {
-  const { t } = useTranslation()
-
   return (
     <BrowserRouter>
       <Provider store={store}>
-        {t('welcome')}
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path='/' element={<Layout />}>
-              <Route index element={<Home />} />
-            </Route>
-            <Route path='*' element={<div>404 not found</div>} />
-          </Routes>
-        </Suspense>
+        <ThemeProvider>
+          <Suspense
+            fallback={
+              <Box
+                sx={{
+                  width: 'fit-content',
+                  m: '40px auto'
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            }
+          >
+            <AppRoutes />
+          </Suspense>
+        </ThemeProvider>
       </Provider>
     </BrowserRouter>
   )

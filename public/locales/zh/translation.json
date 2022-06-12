@@ -1,7 +1,6 @@
 {
-  "welcome": "歡迎",
-  "description": {
-    "part1": "第一部分",
-    "part2": "第二部分"
-  }
+  "exchange": "交易所",
+  "country": "國家",
+  "trustRank": "可信度排名",
+  "url": "網址"
 }
