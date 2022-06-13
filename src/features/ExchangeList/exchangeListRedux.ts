@@ -11,11 +11,13 @@ const initialState: exchangeListState = {
   exchangeList: []
 }
 
+export const FETCH_SOURCE = 'fetchExchangeList'
+
 // https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchExchangeListAsync = createAsyncThunk(
   'exchangeList/fetchExchangeList',
   async (props: FethchListProp & { loadMore?: boolean }) => {
-    statusSubject.next({ loading: true })
+    statusSubject.next({ loading: true, source: FETCH_SOURCE })
     const response = await fetchExchangeList(props)
     return {
       list: response.data,
@@ -38,10 +40,10 @@ export const exchangeListSlice = createSlice({
     builder
       .addCase(fetchExchangeListAsync.fulfilled, (state, { payload }) => {
         state.exchangeList = payload.loadMore ? state.exchangeList.concat(payload.list) : payload.list
-        statusSubject.next({ success: true })
+        statusSubject.next({ success: true, source: FETCH_SOURCE })
       })
       .addCase(fetchExchangeListAsync.rejected, () => {
-        statusSubject.next({ failed: true })
+        statusSubject.next({ failed: true, source: FETCH_SOURCE })
       })
   }
 })

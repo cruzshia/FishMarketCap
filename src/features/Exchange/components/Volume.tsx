@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
+import Skeleton from '@mui/material/Skeleton'
 import { Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
@@ -62,7 +62,7 @@ export default function Volume({ volume, loading, labels, data }: Props) {
           {volume} BTC
         </Typography>
       </Typography>
-      {loading && <CircularProgress />}
+      {loading && <Skeleton variant='rectangular' width={300} height={200} />}
       {data.length && (
         <Box maxWidth='300px' height='200px'>
           <Line options={options} data={chartData} />

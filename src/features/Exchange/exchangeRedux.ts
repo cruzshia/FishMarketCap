@@ -11,16 +11,18 @@ export interface exchangeState {
 const initialState: exchangeState = { volumeData: [] }
 
 // https://redux-toolkit.js.org/api/createAsyncThunk
+export const EXCHANGE_SOURCE = 'fetchExchange'
 export const fetchExchangeAsync = createAsyncThunk('exchange/fetchExchange', async (id: string) => {
-  statusSubject.next({ loading: true })
+  statusSubject.next({ loading: true, source: EXCHANGE_SOURCE })
   const response = await fetchExchange(id)
   return response.data
 })
 
+export const EXCHANGE_VOLUME = 'fetchVolume'
 export const fetchVolumeAsync = createAsyncThunk(
   'exchange/fetchVolume',
   async (props: { id: string; days?: number }) => {
-    statusSubject.next({ loading: true, source: 'loading' })
+    statusSubject.next({ loading: true, source: EXCHANGE_VOLUME })
     const response = await fetchVolume(props)
     return response.data
   }
@@ -38,17 +40,17 @@ export const exchangeSlice = createSlice({
     builder
       .addCase(fetchExchangeAsync.fulfilled, (state, action) => {
         state.exchange = action.payload
-        statusSubject.next({ success: true })
+        statusSubject.next({ success: true, source: EXCHANGE_SOURCE })
       })
       .addCase(fetchExchangeAsync.rejected, () => {
-        statusSubject.next({ failed: true })
+        statusSubject.next({ failed: true, source: EXCHANGE_SOURCE })
       })
       .addCase(fetchVolumeAsync.fulfilled, (state, action) => {
         state.volumeData = action.payload
-        statusSubject.next({ success: true, source: 'loading' })
+        statusSubject.next({ success: true, source: EXCHANGE_VOLUME })
       })
       .addCase(fetchVolumeAsync.rejected, () => {
-        statusSubject.next({ failed: true, source: 'loading' })
+        statusSubject.next({ failed: true, source: EXCHANGE_VOLUME })
       })
   }
 })
