@@ -12,7 +12,7 @@ import { fetchExchangeAsync, selectExchange, fetchVolumeAsync, selectVolumeData 
 import { ROUTE_PATH } from '@/AppRoutes'
 import SocailMeida from './components/SocialMedia'
 import InfoItem from './components/InfoItem'
-import Volume, { DataProp } from './components/Volume'
+import Volume from './components/Volume'
 
 const Logo = styled('img')({
   width: '50px',
@@ -34,12 +34,16 @@ export default function Exchange() {
     dispatch(fetchVolumeAsync({ id, days: 1 }))
   }, [id, dispatch])
 
-  const chartData = useMemo(
+  const [labels, chartData] = useMemo(
     () =>
-      volumeData.reduce((acc, data) => {
-        acc.push({ time: data[0], value: data[1] })
-        return acc
-      }, [] as DataProp[]),
+      volumeData.reduce(
+        (acc, data) => {
+          acc[0].push(`${data[0]}`)
+          acc[1].push(data[1])
+          return acc
+        },
+        [[] as string[], [] as number[]]
+      ),
     [volumeData]
   )
 
@@ -60,21 +64,21 @@ export default function Exchange() {
           <Grid container alignItems='center'>
             <Logo src={data.image} alt={data.name} />
             <div>
-              <Typography variant='h6' lineHeight='20px'>
+              <Typography variant='h6' lineHeight='20px' data-cy='exchange-name'>
                 {data.name}
               </Typography>
               <Typography variant='caption'>@{data.country}</Typography>
             </div>
           </Grid>
           <Box sx={{ m: '20px 0 10px' }}>
-            <InfoItem label={t('trustRank')} info={data.trust_score_rank} />
-            <InfoItem label={t('yearEstablished')} info={data.year_established} />
+            <InfoItem label={t('trustRank')} data-cy='exchange-rank' info={data.trust_score_rank} />
+            <InfoItem label={t('yearEstablished')} data-cy='exchange-established' info={data.year_established} />
             {data.description && (
               <Typography variant='body1' sx={{ m: '10px 0' }}>
                 {data.description}
               </Typography>
             )}
-            <Volume volume={data.trade_volume_24h_btc} data={chartData} />
+            <Volume volume={data.trade_volume_24h_btc} labels={labels} data={chartData} />
             <SocailMeida {...data} />
           </Box>
         </Box>

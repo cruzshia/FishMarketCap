@@ -2,6 +2,10 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import exchangeListReducer from '../features/ExchangeList/exchangeListRedux'
 import exchangeRedux from '../features/Exchange/exchangeRedux'
 
+/** reduxjs/toolkit helps us configure redux more easily
+ * for more details: https://redux-toolkit.js.org/tutorials/typescript
+ */
+
 const store = configureStore({
   reducer: {
     exchangeList: exchangeListReducer,

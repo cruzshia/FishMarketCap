@@ -36,7 +36,7 @@ export default function ExchangeList() {
     <>
       <ExchangeTable data={data} loading={loading} />
       <Box sx={{ textAlign: 'center', mt: '10px' }}>
-        <LoadingButton loading={loading} onClick={handleClickMore}>
+        <LoadingButton data-cy='load-more' loading={loading} onClick={handleClickMore}>
           {t('showMore')}
         </LoadingButton>
       </Box>

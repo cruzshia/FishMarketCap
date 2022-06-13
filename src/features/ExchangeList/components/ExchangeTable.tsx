@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ColumnType, DefaultRecordType } from 'rc-table/lib/interface'
 import { useTheme } from '@mui/material/styles'
@@ -21,6 +21,14 @@ function ExchangeTable({ data, loading }: Props) {
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
 
+  const handleRow = useCallback(
+    (record: DefaultRecordType) => ({
+      'data-cy': 'exchange-row',
+      'data-id': `exchange-${record.id}`
+    }),
+    []
+  )
+
   const columns: ColumnType<DefaultRecordType>[] = useMemo(
     () => [
       {
@@ -29,12 +37,15 @@ function ExchangeTable({ data, loading }: Props) {
         key: 'name',
         fixed: 'left',
         width: matches ? 160 : 200,
+        onCell: () => ({
+          'data-cy': 'name'
+        }),
         render: (value, data) => {
           return (
             <Link color='inherit' underline='none' href={ROUTE_PATH.EXHCANGE.replace(':id', data.id)} target='_blank'>
               <Grid container alignItems='center'>
                 <Avatar sx={{ mr: '10px', width: '20px', height: '20px' }} alt={data.name} src={data.image} />
-                <Grid alignItems={'center'} sx={{ flex: 1 }}>
+                <Grid alignItems='center' data-cy='rank' sx={{ flex: 1 }}>
                   {value} {matches && <Chip size='small' label={data.trust_score_rank} />}
                 </Grid>
               </Grid>
@@ -43,13 +54,26 @@ function ExchangeTable({ data, loading }: Props) {
         }
       },
       ...(!matches
-        ? [{ title: t('trustRank'), dataIndex: 'trust_score_rank', key: 'trust_score_rank', width: 120 }]
+        ? [
+            {
+              title: t('trustRank'),
+              dataIndex: 'trust_score_rank',
+              key: 'trust_score_rank',
+              width: 120,
+              onCell: () => ({
+                'data-cy': 'rank'
+              })
+            }
+          ]
         : []),
       {
         title: t('country'),
         dataIndex: 'country',
         width: 200,
-        key: 'country'
+        key: 'country',
+        onCell: () => ({
+          'data-cy': 'country'
+        })
       },
       {
         title: t('url'),
@@ -65,7 +89,7 @@ function ExchangeTable({ data, loading }: Props) {
     [t, matches]
   )
 
-  return <Table columns={columns} data={data} loading={loading} />
+  return <Table onRow={handleRow} columns={columns} data={data} loading={loading} />
 }
 
 export default ExchangeTable

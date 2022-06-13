@@ -10,6 +10,7 @@ export interface exchangeState {
 
 const initialState: exchangeState = { volumeData: [] }
 
+// https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchExchangeAsync = createAsyncThunk('exchange/fetchExchange', async (id: string) => {
   statusSubject.next({ loading: true })
   const response = await fetchExchange(id)

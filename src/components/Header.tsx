@@ -50,7 +50,7 @@ function Header() {
         </IconButton>
         <Typography variant='subtitle1' component='div' sx={{ flexGrow: 1, pl: '20px' }} />
         <div>
-          <IconButton disableRipple={true} disableFocusRipple={true} onClick={handleClick}>
+          <IconButton disableRipple={true} disableFocusRipple={true} data-cy='lang-selector' onClick={handleClick}>
             <GTranslateIcon sx={{ color: HEAD_COLOR }} />
           </IconButton>
           <Menu

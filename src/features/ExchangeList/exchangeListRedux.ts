@@ -11,6 +11,7 @@ const initialState: exchangeListState = {
   exchangeList: []
 }
 
+// https://redux-toolkit.js.org/api/createAsyncThunk
 export const fetchExchangeListAsync = createAsyncThunk(
   'exchangeList/fetchExchangeList',
   async (props: FethchListProp & { loadMore?: boolean }) => {

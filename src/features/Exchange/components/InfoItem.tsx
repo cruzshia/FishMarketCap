@@ -5,15 +5,16 @@ import Box from '@mui/material/Box'
 interface Props {
   label: React.ReactNode
   info: React.ReactNode
+  'data-cy'?: string
 }
 
-export default function InfoItem(props: Props) {
+export default function InfoItem({ label, info, ...props }: Props) {
   return (
-    <Box>
+    <Box data-cy={props['data-cy']}>
       <Typography variant='body2' component='span' sx={{ fontWeight: 500 }}>
-        {props.label}
+        {label}
       </Typography>
-      : {props.info}
+      : {info}
     </Box>
   )
 }
