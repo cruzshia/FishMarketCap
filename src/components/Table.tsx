@@ -1,7 +1,7 @@
 import Table from 'rc-table'
 import { DefaultRecordType } from 'rc-table/lib/interface'
 import { TableProps } from 'rc-table/lib/Table'
-import styled from '@emotion/styled'
+import { styled } from '@mui/material/styles'
 import Skeleton from '@mui/material/Skeleton'
 
 interface Props extends TableProps<DefaultRecordType> {

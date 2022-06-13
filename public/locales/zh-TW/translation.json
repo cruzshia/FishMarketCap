@@ -1,6 +1,11 @@
 {
   "exchange": "交易所",
+  "exchangeList": "交易所列表",
   "country": "國家",
   "trustRank": "可信度排名",
-  "url": "網址"
+  "url": "網址",
+  "showMore": "載入更多",
+  "yearEstablished": "創建年份",
+  "socialMedia": "社群媒體",
+  "btcVolume24h": "24小時比特幣交易量"
 }

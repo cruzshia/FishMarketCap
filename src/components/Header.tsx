@@ -34,7 +34,15 @@ function Header() {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
+        <IconButton
+          size='large'
+          edge='start'
+          color='inherit'
+          disableRipple={true}
+          disableFocusRipple={true}
+          aria-label='logo'
+          sx={{ mr: 2 }}
+        >
           <SetMealIcon sx={{ color: HEAD_COLOR }} />
           <Typography variant='h1' fontSize='18px' fontWeight={500} color={HEAD_COLOR} sx={{ ml: '4px' }}>
             Fish.MarketCap
@@ -42,7 +50,7 @@ function Header() {
         </IconButton>
         <Typography variant='subtitle1' component='div' sx={{ flexGrow: 1, pl: '20px' }} />
         <div>
-          <IconButton onClick={handleClick}>
+          <IconButton disableRipple={true} disableFocusRipple={true} onClick={handleClick}>
             <GTranslateIcon sx={{ color: HEAD_COLOR }} />
           </IconButton>
           <Menu

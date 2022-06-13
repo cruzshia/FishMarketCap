@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip'
 import Link from '@mui/material/Link'
 import Table from '@/components/Table'
 import { ROUTE_PATH } from '@/AppRoutes'
-import { Exchange } from '../homeApi'
+import { Exchange } from '../exchangeListApi'
 
 interface Props {
   data: Exchange[]
@@ -56,7 +56,7 @@ function ExchangeTable({ data, loading }: Props) {
         dataIndex: 'url',
         key: 'url',
         render: (value) => (
-          <Link href={value} color='#2D39C2' rel='noreferrer' target='_blank'>
+          <Link href={value} rel='noreferrer' underline='none' target='_blank'>
             {value}
           </Link>
         )

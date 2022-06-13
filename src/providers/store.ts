@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import homeReducer from '../features/Home/homeRedux'
+import exchangeListReducer from '../features/ExchangeList/exchangeListRedux'
+import exchangeRedux from '../features/Exchange/exchangeRedux'
 
 const store = configureStore({
   reducer: {
-    home: homeReducer
+    exchangeList: exchangeListReducer,
+    exchange: exchangeRedux
   }
 })
 

@@ -12,6 +12,15 @@ function ThemeProvider({ children }: PropsWithChildren) {
           primary: {
             main: '#82d116'
           }
+        },
+        components: {
+          MuiLink: {
+            styleOverrides: {
+              root: {
+                color: '#2D39C2'
+              }
+            }
+          }
         }
       })}
     >

@@ -11,9 +11,14 @@ export interface Exchange {
   trust_score: number
   trust_score_rank: number
   year_established: number
-
-  description?: string
-  image?: string
+  description: string
+  image: string
 }
 
-export const fetchExchangeList = () => axios.get<Exchange[]>('/exchanges?per_page=20')
+export interface FethchListProp {
+  perPage?: number
+  page?: number
+}
+
+export const fetchExchangeList = ({ perPage = 20, page = 1 }: FethchListProp) =>
+  axios.get<Exchange[]>(`/exchanges?page=${page}&per_page=${perPage}`)

@@ -1,6 +1,11 @@
 {
   "exchange": "Exchange",
+  "exchangeList": "Exchange List",
   "country": "Country",
   "trustRank": "Trust Rank",
-  "url": "URL"
+  "url": "URL",
+  "showMore": "Show More",
+  "yearEstablished": "Year Established",
+  "socialMedia": "Socail Media",
+  "btcVolume24h": "24H BTC trading Volume"
 }
