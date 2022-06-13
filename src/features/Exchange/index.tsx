@@ -49,7 +49,7 @@ export default function Exchange() {
     () =>
       volumeData.reduce(
         (acc, data) => {
-          acc[0].push(`${data[0]}`)
+          acc[0].push(`label-${data[0]}`)
           acc[1].push(data[1])
           return acc
         },
