@@ -33,7 +33,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-**Note: Exchange list RWD page doesn't support IE 11, because rc-table uses position: sticky style**
+## Note
+
+**Exchange list RWD page doesn't support IE 11, because rc-table uses position: sticky style**
 
 If we wan't support IE 11, I'll suggest use some polyfills (e.g. StickyBits) to make it display correctly.
 
